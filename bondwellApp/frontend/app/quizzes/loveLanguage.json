@@ -1,0 +1,369 @@
+{
+  "sexualCompatibilityQuiz": {
+  "title": "Sexual Compatibility Quiz",
+  "type": "style-based",
+  "questions": [
+    {
+      "question": "What turns you on the most in a partner?",
+      "answers": [
+        { "text": "Deep eye contact and emotional connection.", "points": 1, "style": "Emotional Intimacy" },
+        { "text": "Physical touch and passionate kisses.", "points": 1, "style": "Physical Intimacy" },
+        { "text": "Candlelit dinners and romantic surprises.", "points": 1, "style": "Romantic Intimacy" },
+        { "text": "Bold moves and adventurous suggestions.", "points": 1, "style": "Adventurous Intimacy" },
+        { "text": "Exploring fantasies and trying new things.", "points": 1, "style": "Sexual Exploration" }
+      ]
+    },
+    {
+      "question": "How do you like to set the mood?",
+      "answers": [
+        { "text": "Heartfelt conversations that build trust.", "points": 1, "style": "Emotional Intimacy" },
+        { "text": "A sensual massage and physical closeness.", "points": 1, "style": "Physical Intimacy" },
+        { "text": "Lighting candles and playing soft music.", "points": 1, "style": "Romantic Intimacy" },
+        { "text": "Suggesting something unexpected and fun.", "points": 1, "style": "Adventurous Intimacy" },
+        { "text": "Whispering fantasies and teasing the possibilities.", "points": 1, "style": "Sexual Exploration" }
+      ]
+    },
+    {
+      "question": "Which scenario excites you the most?",
+      "answers": [
+        { "text": "Pouring your heart out and feeling truly seen.", "points": 1, "style": "Emotional Intimacy" },
+        { "text": "A steamy night of passionate physical connection.", "points": 1, "style": "Physical Intimacy" },
+        { "text": "A surprise getaway to a romantic destination.", "points": 1, "style": "Romantic Intimacy" },
+        { "text": "An adventurous date that pushes boundaries.", "points": 1, "style": "Adventurous Intimacy" },
+        { "text": "Experimenting with fantasies you’ve never tried before.", "points": 1, "style": "Sexual Exploration" }
+      ]
+    },
+    {
+      "question": "How do you keep the spark alive in a long-term relationship?",
+      "answers": [
+        { "text": "Consistent, open, and vulnerable communication.", "points": 1, "style": "Emotional Intimacy" },
+        { "text": "Keeping physical affection a priority.", "points": 1, "style": "Physical Intimacy" },
+        { "text": "Planning romantic surprises and date nights.", "points": 1, "style": "Romantic Intimacy" },
+        { "text": "Trying new activities and pushing limits together.", "points": 1, "style": "Adventurous Intimacy" },
+        { "text": "Exploring new fantasies and staying curious.", "points": 1, "style": "Sexual Exploration" }
+      ]
+    },
+    {
+      "question": "What’s your ideal way to explore intimacy with your partner?",
+      "answers": [
+        { "text": "Sharing secrets and building emotional closeness.", "points": 1, "style": "Emotional Intimacy" },
+        { "text": "Discovering each other’s bodies through touch.", "points": 1, "style": "Physical Intimacy" },
+        { "text": "Crafting a magical romantic evening together.", "points": 1, "style": "Romantic Intimacy" },
+        { "text": "Taking risks and trying something completely new.", "points": 1, "style": "Adventurous Intimacy" },
+        { "text": "Diving into shared fantasies and desires.", "points": 1, "style": "Sexual Exploration" }
+      ]
+    }
+  ],
+  "outcomes": {
+    "Emotional Intimacy": {
+      "description": "You crave deep emotional connections as the foundation of your intimacy. Feeling truly seen and understood excites you more than anything else.",
+      "idealPartnerTraits": "Empathetic, emotionally available, and willing to communicate openly.",
+      "suggestionsForPartner": [
+        "Share your deepest thoughts and listen with full attention.",
+        "Be vulnerable and express your emotions freely.",
+        "Create moments to connect emotionally before anything physical."
+      ],
+      "recommendations": [
+        "Read books about emotional intelligence and connection.",
+        "Try couples’ exercises that enhance emotional awareness.",
+        "Practice gratitude journaling together to deepen your bond."
+      ]
+    },
+    "Physical Intimacy": {
+      "description": "You thrive on physical closeness and passionate touch to feel fully connected. Sensuality is your love language, and you’re not afraid to show it.",
+      "idealPartnerTraits": "Affectionate, attentive to physical needs, and confident in expressing desire.",
+      "suggestionsForPartner": [
+        "Initiate daily physical gestures, like hugs or kisses.",
+        "Plan sensual activities, such as a shared bubble bath or massage.",
+        "Be attentive and responsive to your partner’s physical cues."
+      ],
+      "recommendations": [
+        "Explore books or guides on enhancing physical intimacy.",
+        "Learn massage techniques to spice up physical touch.",
+        "Experiment with activities that encourage closeness, like yoga or dance."
+      ]
+    },
+    "Romantic Intimacy": {
+      "description": "You’re a hopeless romantic who values grand gestures and magical moments. Your ideal intimacy is filled with thoughtfulness and meaningful surprises.",
+      "idealPartnerTraits": "Thoughtful, creative, and enjoys planning special experiences.",
+      "suggestionsForPartner": [
+        "Plan surprise dates or romantic evenings.",
+        "Show love through small but meaningful gestures, like flowers or love notes.",
+        "Create a playlist or ambiance to set the mood for intimacy."
+      ],
+      "recommendations": [
+        "Explore books about romantic connection and love languages.",
+        "Try creative date ideas, like painting nights or scenic picnics.",
+        "Use apps that help you plan romantic getaways or surprises."
+      ]
+    },
+    "Adventurous Intimacy": {
+      "description": "You thrive on excitement and spontaneity in your intimate life. New experiences and bold moves keep your passion alive.",
+      "idealPartnerTraits": "Adventurous, playful, and willing to try new things.",
+      "suggestionsForPartner": [
+        "Plan spontaneous adventures, like road trips or surprise outings.",
+        "Take risks in the bedroom and explore new scenarios together.",
+        "Encourage each other to try activities outside your comfort zones."
+      ],
+      "recommendations": [
+        "Explore adventure-focused workshops or classes.",
+        "Try apps that suggest unique date ideas or activities.",
+        "Watch shows or read about adventurous couples for inspiration."
+      ]
+    },
+    "Sexual Exploration": {
+      "description": "You’re curious and eager to explore new fantasies and desires with your partner. Communication and experimentation are your keys to satisfaction.",
+      "idealPartnerTraits": "Open-minded, confident, and eager to explore shared desires.",
+      "suggestionsForPartner": [
+        "Discuss fantasies and desires openly and without judgment.",
+        "Experiment with new ideas in a safe and consensual way.",
+        "Focus on mutual pleasure and shared exploration."
+      ],
+      "recommendations": [
+        "Read books or guides on sexual exploration and communication.",
+        "Try apps or tools designed to spark intimate conversations.",
+        "Explore mindfulness techniques to enhance intimacy."
+      ]
+    }
+  }
+}
+,
+    "loveLanguageQuiz": {
+      "title": "Love Language Quiz",
+      "type": "style-based",
+      "questions": [
+        {
+          "question": "I feel most loved when my partner...",
+          "answers": [
+            { "text": "Compliments me.", "points": 1, "style": "Words of Affirmation" },
+            { "text": "Spends quality time with me.", "points": 1, "style": "Quality Time" },
+            { "text": "Surprises me with gifts.", "points": 1, "style": "Receiving Gifts" },
+            { "text": "Helps me with tasks.", "points": 1, "style": "Acts of Service" },
+            { "text": "Shows affection physically.", "points": 1, "style": "Physical Touch" }
+          ]
+        },
+        {
+          "question": "When I want to show love, I usually...",
+          "answers": [
+            { "text": "Write a heartfelt note or text.", "points": 1, "style": "Words of Affirmation" },
+            { "text": "Plan a special date.", "points": 1, "style": "Quality Time" },
+            { "text": "Buy a thoughtful present.", "points": 1, "style": "Receiving Gifts" },
+            { "text": "Take care of something for them.", "points": 1, "style": "Acts of Service" },
+            { "text": "Give hugs or hold hands.", "points": 1, "style": "Physical Touch" }
+          ]
+        },
+        {
+          "question": "Which of these makes you feel most connected?",
+          "answers": [
+            { "text": "Receiving compliments or kind words.", "points": 1, "style": "Words of Affirmation" },
+            { "text": "Having undivided attention during conversations.", "points": 1, "style": "Quality Time" },
+            { "text": "Getting thoughtful gifts.", "points": 1, "style": "Receiving Gifts" },
+            { "text": "Receiving help with tasks.", "points": 1, "style": "Acts of Service" },
+            { "text": "Physical closeness like hugs or kisses.", "points": 1, "style": "Physical Touch" }
+          ]
+        },
+        {
+          "question": "What do you appreciate most from your partner?",
+          "answers": [
+            { "text": "Encouraging words.", "points": 1, "style": "Words of Affirmation" },
+            { "text": "Spending quality time together.", "points": 1, "style": "Quality Time" },
+            { "text": "Thoughtful gifts.", "points": 1, "style": "Receiving Gifts" },
+            { "text": "Helping with my responsibilities.", "points": 1, "style": "Acts of Service" },
+            { "text": "Cuddling or holding hands.", "points": 1, "style": "Physical Touch" }
+          ]
+        },
+        {
+          "question": "What makes you feel most appreciated?",
+          "answers": [
+            { "text": "Words of affirmation.", "points": 1, "style": "Words of Affirmation" },
+            { "text": "Quality time.", "points": 1, "style": "Quality Time" },
+            { "text": "Receiving gifts.", "points": 1, "style": "Receiving Gifts" },
+            { "text": "Acts of service.", "points": 1, "style": "Acts of Service" },
+            { "text": "Physical touch.", "points": 1, "style": "Physical Touch" }
+          ]
+        }
+      ],
+"outcomes": {
+  "Words of Affirmation": {
+    "description": "You feel loved through kind words and compliments.",
+    "idealPartnerTraits": "Someone who is expressive and values verbal communication.",
+    "suggestionsForPartner": [
+      "Offer daily compliments to build confidence and connection.",
+      "Write heartfelt notes or messages to express appreciation.",
+      "Verbally acknowledge achievements and efforts."
+    ],
+    "recommendations": [
+      "Read books about verbal communication, such as 'The Five Love Languages'.",
+      "Practice gratitude journaling to improve positive affirmations.",
+      "Explore apps or tools for sharing daily positive affirmations."
+    ]
+  },
+  "Quality Time": {
+    "description": "You value undivided attention and meaningful time spent together.",
+    "idealPartnerTraits": "Someone who prioritizes shared experiences and active listening.",
+    "suggestionsForPartner": [
+      "Schedule weekly date nights with no distractions.",
+      "Plan activities or trips to create lasting memories.",
+      "Practice being fully present during conversations."
+    ],
+    "recommendations": [
+      "Try couple-oriented activities, like cooking classes or hiking.",
+      "Use apps that encourage shared goals or experiences (e.g., adventure planners).",
+      "Read books about creating meaningful connections."
+    ]
+  },
+  "Receiving Gifts": {
+    "description": "Thoughtful presents and tokens of love are most meaningful to you.",
+    "idealPartnerTraits": "Someone who enjoys thoughtful gestures and remembers special occasions.",
+    "suggestionsForPartner": [
+      "Focus on meaningful rather than expensive gifts.",
+      "Surprise your partner with small tokens that reflect their interests.",
+      "Pay attention to hints about items they like or need."
+    ],
+    "recommendations": [
+      "Explore curated gift lists for inspiration.",
+      "Keep a shared wishlist to ensure gifts are meaningful.",
+      "Look into creative or DIY gift ideas for a personal touch."
+    ]
+  },
+  "Acts of Service": {
+    "description": "You feel most loved when your partner helps you or takes care of tasks.",
+    "idealPartnerTraits": "Someone who is attentive and proactive in offering support.",
+    "suggestionsForPartner": [
+      "Help with daily tasks like cooking, cleaning, or errands.",
+      "Take initiative in planning or organizing shared responsibilities.",
+      "Surprise your partner by completing tasks they dislike."
+    ],
+    "recommendations": [
+      "Use tools like 'Trello' or 'Todoist' to coordinate tasks efficiently.",
+      "Learn about the importance of shared responsibilities in relationships.",
+      "Read blogs or watch videos on acts of service in partnerships."
+    ]
+  },
+  "Physical Touch": {
+    "description": "Physical closeness, like hugs and cuddles, is your love language.",
+    "idealPartnerTraits": "Someone who values touch as a form of comfort and connection.",
+    "suggestionsForPartner": [
+      "Give hugs, hold hands, or cuddle during quiet moments.",
+      "Be attentive to their comfort level with physical affection.",
+      "Offer massages or other forms of relaxing touch."
+    ],
+    "recommendations": [
+      "Explore activities that involve physical closeness, like dancing or yoga.",
+      "Learn about the benefits of physical affection for emotional well-being.",
+      "Read relationship guides focused on touch-based connections."
+    ]
+  }
+}
+
+    },
+
+
+    "emotionalIntimacyQuiz":{
+      "title": "Emotional Intimacy Quiz",
+      "type": "points-based",
+      
+     "questions": [
+    {
+      "question": "How often do you share your feelings with your partner?",
+      "answers": [
+        { "text": "Always.", "points": 5 },
+        { "text": "Often.", "points": 3 },
+        { "text": "Sometimes.", "points": 2 },
+        { "text": "Rarely.", "points": 1 },
+        { "text": "Never.", "points": 1 }
+      ]
+    },
+    {
+      "question": "Do you feel safe discussing difficult topics with your partner?",
+      "answers": [
+        { "text": "Yes, always.", "points": 5 },
+        { "text": "Most of the time.", "points": 3 },
+        { "text": "Sometimes.", "points": 2 },
+        { "text": "Rarely.", "points": 1 },
+        { "text": "No, never.", "points": 1 }
+      ]
+    },
+    {
+      "question": "How often do you feel understood by your partner?",
+      "answers": [
+        { "text": "Always.", "points": 5 },
+        { "text": "Often.", "points": 3 },
+        { "text": "Sometimes.", "points": 2 },
+        { "text": "Rarely.", "points": 1 },
+        { "text": "Never.", "points": 1 }
+      ]
+    },
+    {
+      "question": "When was the last time you had a deep, meaningful conversation with your partner?",
+      "answers": [
+        { "text": "Today or yesterday.", "points": 5 },
+        { "text": "Within the last week.", "points": 3 },
+        { "text": "Within the last month.", "points": 2 },
+        { "text": "A few months ago.", "points": 1 },
+        { "text": "I can't remember.", "points": 1 }
+      ]
+    },
+    {
+      "question": "How comfortable are you being vulnerable with your partner?",
+      "answers": [
+        { "text": "Very comfortable.", "points": 5 },
+        { "text": "Comfortable.", "points": 3 },
+        { "text": "Somewhat comfortable.", "points": 2 },
+        { "text": "Uncomfortable.", "points": 1 },
+        { "text": "Very uncomfortable.", "points": 1 }
+      ]
+    }
+  ],
+   
+"outcomes": {
+  "High Intimacy": {
+    "range": [20, 25],
+    "description": "You and your partner share a deep emotional connection.",
+    "idealPartnerTraits": "Empathetic, open-minded, and communicative.",
+    "suggestionsForPartner": [
+      "Have meaningful conversations regularly.",
+      "Be honest about your feelings and encourage vulnerability.",
+      "Celebrate emotional milestones together."
+    ],
+    "recommendations": [
+      "Explore 'Nonviolent Communication' for deeper connection.",
+      "Practice mindfulness to enhance emotional presence.",
+      "Read books about emotional intelligence."
+    ]
+  },
+  "Moderate Intimacy": {
+    "range": [13, 19],
+    "description": "You share feelings but could improve in understanding and trust.",
+    "idealPartnerTraits": "Patient, supportive, and willing to grow.",
+    "suggestionsForPartner": [
+      "Create a safe space for discussing difficult topics.",
+      "Spend time learning about each other’s emotional needs.",
+      "Work on active listening skills to build understanding."
+    ],
+    "recommendations": [
+      "Try journaling to express and share feelings.",
+      "Explore couples therapy to strengthen connection.",
+      "Join relationship workshops for emotional intimacy."
+    ]
+  },
+  "Low Intimacy": {
+    "range": [0, 12],
+    "description": "You might find it challenging to share your feelings or feel understood. Building trust and communication could greatly improve your relationship.",
+    "idealPartnerTraits": "Supportive, understanding, and willing to help create a safe space for growth.",
+    "suggestionsForPartner": [
+        "Encourage open communication in a judgment-free environment.",
+        "Take small steps to build trust and emotional safety.",
+        "Focus on being patient and empathetic during difficult conversations."
+    ],
+    "recommendations": [
+        "Read books or articles on building trust in relationships.",
+        "Consider individual or couple’s therapy to address deeper issues.",
+        "Practice daily habits like expressing gratitude to strengthen emotional bonds."
+    ]
+}
+
+}
+
+    }
+  }

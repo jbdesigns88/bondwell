@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/storage": "^7.14.0",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "openai": "^4.71.0",
+    "passport": "^0.7.0",
+    "pg": "^8.13.1",
+    "pg-hstore": "^2.3.4",
+    "react-native-tts": "^4.1.1",
+    "sequelize": "^6.37.5",
+    "socket.io": "^4.8.1",
+    "uuid": "^11.0.2"
+  }
+}
