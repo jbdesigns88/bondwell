@@ -10,6 +10,7 @@ const { Server } = require('socket.io');
 const cors = require('cors');
  require('dotenv').config()
  const { Storage } = require('@google-cloud/storage');
+ import routes from './routes/index.js';
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -199,6 +200,7 @@ io.on('connection', (socket) => {
     });
   });
 });
+app.use('/api/v1', routes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;

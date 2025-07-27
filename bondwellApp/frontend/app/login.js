@@ -20,6 +20,7 @@ const Welcome = ({ username }) => (
 
 const Login = ({ callback = (success = false) => {} }) => {
     const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [success,setSuccess] = useState(false)
     const [error, setError] = useState("");
     const { width } = useWindowDimensions();
@@ -41,6 +42,27 @@ const Login = ({ callback = (success = false) => {} }) => {
             ? require("../images/mobile_background_bigger.jpg")
             : require("../images/web_background.jpg");
 
+
+    const handleSubmission = async () => {
+        if (!error && username ) {
+            await axios.post('/api/v1/user', {
+                data: {
+                    username,
+                    password,
+                },
+            })
+            .then(response => {
+                console.log("User created successfully:", response.data);   
+            })
+            .catch(error => {
+                console.error("Error creating user:", error);
+                setError("Error creating user. Please try again.");
+            });
+            localStorage.setItem("bondwell:username", username);
+            setSuccess(true);
+        }
+            
+    }
     return (
         <ImageBackground
             source={backgroundImage}
@@ -64,6 +86,13 @@ const Login = ({ callback = (success = false) => {} }) => {
                             placeholderTextColor="#B8868B"
                             value={username}
                             onChangeText={setUsername}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Password"
+                            placeholderTextColor="#B8868B"
+                            value={username}
+                            onChangeText={setPassword}
                         />
                         {error ? <Text style={styles.errorText}>{error}</Text> : null}
                         <TouchableOpacity

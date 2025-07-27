@@ -1,4 +1,169 @@
-{
+{"loveEraQuiz": {
+    "title": "What Era Is Your Love Style From?",
+    "type": "style-based",
+    "questions": [
+      {
+        "question": "How do you express love most naturally?",
+        "answers": [
+          { "text": "Through slow dancing and heartfelt letters.", "points": 1, "style": "1950s" },
+          { "text": "Through poetic words and idealistic romance.", "points": 1, "style": "1960s" },
+          { "text": "Through deep emotions and soul-baring lyrics.", "points": 1, "style": "1970s" },
+          { "text": "Through mixtapes, bold gestures, and passion.", "points": 1, "style": "1980s" },
+          { "text": "Through vulnerability, loyalty, and 'ride or die' vibes.", "points": 1, "style": "1990s" },
+          { "text": "Through texting, thoughtful surprises, and shared playlists.", "points": 1, "style": "2010s" },
+          { "text": "Through open communication, memes, and emotional awareness.", "points": 1, "style": "2020s" }
+        ]
+      },
+      {
+        "question": "Which love song speaks to your heart the most?",
+        "answers": [
+          { "text": "\"Unchained Melody\" by The Righteous Brothers", "points": 1, "style": "1950s" },
+          { "text": "\"Something\" by The Beatles", "points": 1, "style": "1960s" },
+          { "text": "\"Let's Stay Together\" by Al Green", "points": 1, "style": "1970s" },
+          { "text": "\"I Want to Know What Love Is\" by Foreigner", "points": 1, "style": "1980s" },
+          { "text": "\"I Will Always Love You\" by Whitney Houston", "points": 1, "style": "1990s" },
+          { "text": "\"Adorn\" by Miguel", "points": 1, "style": "2010s" },
+          { "text": "\"Die for You (Remix)\" by The Weeknd & Ariana Grande", "points": 1, "style": "2020s" }
+        ]
+      },
+      {
+        "question": "Your ideal romantic gesture is...",
+        "answers": [
+          { "text": "A handwritten letter and a bouquet of flowers.", "points": 1, "style": "1950s" },
+          { "text": "Stargazing while sharing dreams of the future.", "points": 1, "style": "1960s" },
+          { "text": "Slow dancing in the living room to soul music.", "points": 1, "style": "1970s" },
+          { "text": "A passionate kiss in the rain after a big fight.", "points": 1, "style": "1980s" },
+          { "text": "Making a mixtape or playlist that captures your love.", "points": 1, "style": "1990s" },
+          { "text": "Flying in to surprise them or planning a weekend away.", "points": 1, "style": "2010s" },
+          { "text": "A shared therapy session or journaling together.", "points": 1, "style": "2020s" }
+        ]
+      },
+      {
+        "question": "Which relationship vibe fits you best?",
+        "answers": [
+          { "text": "Sweet and respectful — you court love slowly.", "points": 1, "style": "1950s" },
+          { "text": "Free-spirited and idealistic — love is spiritual.", "points": 1, "style": "1960s" },
+          { "text": "Soulful and steady — love means sticking together.", "points": 1, "style": "1970s" },
+          { "text": "Passionate and intense — love should feel electric.", "points": 1, "style": "1980s" },
+          { "text": "Deep and emotional — love means loyalty and truth.", "points": 1, "style": "1990s" },
+          { "text": "Fun and expressive — love is about shared moments.", "points": 1, "style": "2010s" },
+          { "text": "Open and evolving — love is an ongoing dialogue.", "points": 1, "style": "2020s" }
+        ]
+      },
+      {
+        "question": "How do you handle conflict in love?",
+        "answers": [
+          { "text": "Avoid conflict and focus on kindness.", "points": 1, "style": "1950s" },
+          { "text": "Use peace, patience, and calm communication.", "points": 1, "style": "1960s" },
+          { "text": "Talk it out with honesty and love.", "points": 1, "style": "1970s" },
+          { "text": "Fight for what you believe in — then make up passionately.", "points": 1, "style": "1980s" },
+          { "text": "Speak your truth and expect loyalty in return.", "points": 1, "style": "1990s" },
+          { "text": "Send long texts and talk it out in person later.", "points": 1, "style": "2010s" },
+          { "text": "Use emotional intelligence, accountability, and empathy.", "points": 1, "style": "2020s" }
+        ]
+      }
+    ],
+    "outcomes": {
+      "1950s": {
+        "description": "Your love style is timeless and classic — like slow dances, handwritten letters, and traditional courtship. You value respect, loyalty, and sweet gestures.",
+        "idealPartnerTraits": "Respectful, family-oriented, and emotionally consistent.",
+        "suggestionsForPartner": [
+          "Embrace old-school gestures like flowers and notes.",
+          "Make time for simple dates and meaningful conversations.",
+          "Celebrate anniversaries and little milestones thoughtfully."
+        ],
+        "recommendations": [
+          "Watch classic romances like *Roman Holiday*.",
+          "Listen to 50s love ballads for inspiration.",
+          "Try a retro-themed date night or picnic."
+        ]
+      },
+      "1960s": {
+        "description": "You’re a free spirit at heart — your love flows with peace, understanding, and soulful connection. You believe in harmony and emotional depth.",
+        "idealPartnerTraits": "Open-minded, dreamy, and emotionally expressive.",
+        "suggestionsForPartner": [
+          "Create calming rituals together like meditating or stargazing.",
+          "Encourage big-picture thinking and dream sharing.",
+          "Keep things spontaneous and full of meaning."
+        ],
+        "recommendations": [
+          "Explore 60s-era poetry and romantic music.",
+          "Watch love stories that focus on soul connections.",
+          "Try couple’s journaling or vision boarding together."
+        ]
+      },
+      "1970s": {
+        "description": "Your love is grounded and soulful. You want a steady, committed partner who shares your heart and home. You’re about loyalty, passion, and connection.",
+        "idealPartnerTraits": "Dependable, emotionally honest, and passionate.",
+        "suggestionsForPartner": [
+          "Express love through quality time and deep talks.",
+          "Support each other’s goals and dreams.",
+          "Don’t shy away from soulful moments of vulnerability."
+        ],
+        "recommendations": [
+          "Cook dinner together to 70s soul music.",
+          "Try a vinyl night of love ballads and dancing.",
+          "Read relationship books that focus on long-term intimacy."
+        ]
+      },
+      "1980s": {
+        "description": "You crave big, bold love. You want grand gestures, passionate makeouts, and that can't-eat-can't-sleep kind of connection. Your love is electric.",
+        "idealPartnerTraits": "Spontaneous, expressive, and confident.",
+        "suggestionsForPartner": [
+          "Write love letters or make a mixtape.",
+          "Go on spontaneous adventures or do bold romantic acts.",
+          "Lean into dramatic, unforgettable experiences together."
+        ],
+        "recommendations": [
+          "Rewatch 80s romantic dramas like *Say Anything* or *Dirty Dancing*.",
+          "Blast some 80s power ballads for the mood.",
+          "Create a dramatic '80s night' with outfits and nostalgia."
+        ]
+      },
+      "1990s": {
+        "description": "You love hard and deep. You value emotional loyalty and connection over flashy gestures. Your love is real, raw, and powerful.",
+        "idealPartnerTraits": "Loyal, emotionally available, and expressive.",
+        "suggestionsForPartner": [
+          "Have heart-to-heart talks regularly.",
+          "Be consistent and ride through the highs and lows together.",
+          "Make small gestures that show long-term commitment."
+        ],
+        "recommendations": [
+          "Watch 90s love movies like *Love Jones* or *Poetic Justice*.",
+          "Create a 90s R&B playlist together.",
+          "Read poetry or journal to process feelings as a couple."
+        ]
+      },
+      "2010s": {
+        "description": "Your love thrives on expression, connection, and fun. You’re all about sharing memories, posting sweet moments, and celebrating love openly.",
+        "idealPartnerTraits": "Playful, thoughtful, and social.",
+        "suggestionsForPartner": [
+          "Plan cute dates or surprise trips.",
+          "Send memes or videos that show you care.",
+          "Capture your moments with photos and playlists."
+        ],
+        "recommendations": [
+          "Try photo journaling your relationship.",
+          "Watch modern rom-coms or vlog-style date content.",
+          "Use couple apps to keep things fun and organized."
+        ]
+      },
+      "2020s": {
+        "description": "Your love is conscious, emotionally intelligent, and ever-evolving. You crave open dialogue, emotional safety, and personal growth together.",
+        "idealPartnerTraits": "Self-aware, growth-minded, and communicative.",
+        "suggestionsForPartner": [
+          "Set boundaries and discuss them openly.",
+          "Check in emotionally on a regular basis.",
+          "Learn and grow through hard conversations together."
+        ],
+        "recommendations": [
+          "Listen to relationship podcasts together.",
+          "Try joint therapy or workshops.",
+          "Read books about secure attachment and love in modern times."
+        ]
+      }
+    }
+  },
   "sexualCompatibilityQuiz": {
   "title": "Sexual Compatibility Quiz",
   "type": "style-based",
