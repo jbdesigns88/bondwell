@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "frontend:install": "cd bondwellApp/frontend && npm install",
-    "frontend:build": "cd bondwellApp/frontend && npm run build",
-    "frontend:dev": "cd bondwellApp/frontend && npm start",
-    "backend:install": "cd bondwellApp/backend && npm install",
-    "backend:dev": "cd bondwellApp/backend && npm start",
-    "start": "concurrently \"npm run frontend:dev\" \"npm run backend:dev\""
+    "frontend:install": "cd bondwellApp/frontend && yarn install",
+    "frontend:build": "cd bondwellApp/frontend && yarn run build",
+    "frontend:dev": "cd bondwellApp/frontend && yarn start",
+    "backend:install": "cd bondwellApp/backend && yarn install",
+    "backend:dev": "cd bondwellApp/backend && yarn dev",
+    "start": "concurrently \"yarn run frontend:dev\" \"yarn run backend:dev\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

@@ -1,8 +1,11 @@
 import {View, Text,StyleSheet} from 'react-native'
 import BondwellChat from '../components/bondwellChat'
+import ProtectedRoutes from '../Authentication/ProtectedRoutes'
 export default function Bondwell (){
     return(
+        <ProtectedRoutes>
         <BondwellChat/>
+        </ProtectedRoutes>
     )
 }
 

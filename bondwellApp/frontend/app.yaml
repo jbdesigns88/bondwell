@@ -3,3 +3,4 @@ env: flex
 service: frontend
 env_variables:
   NODE_ENV: "production"
+  BACKEND_API_URL: "https://backend-dot-bondwell-441003.ue.r.appspot.com" 

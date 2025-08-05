@@ -1,18 +1,31 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const axios = require('axios');
-const { v4: uuidv4 } = require('uuid');
-const fs = require('fs');
-const path = require('path');
-const http = require('http');
-const baseKnowledge = require('./knowledge_base/intial_knowledge')
-const { Server } = require('socket.io');
-const cors = require('cors');
- require('dotenv').config()
- const { Storage } = require('@google-cloud/storage');
- import routes from './routes/index.js';
+import dotenv from 'dotenv';
+dotenv.config(); // Load environment variables
+import express from 'express';
+import bodyParser from 'body-parser';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+import fs from 'fs';
+import path from 'path';
+import http from 'http';
+import baseKnowledge from './knowledge_base/intial_knowledge.js';
+import { Server } from 'socket.io';
+import cors from 'cors';
+import { Storage } from '@google-cloud/storage';
+import routes from './routes/index.js';
+import { OpenAI } from "openai";
+ 
 
 const app = express();
+const server = http.createServer(app);
+ 
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+app.use('/api/v1', routes);
+
+ 
+ 
 const httpServer = http.createServer(app);
 
 
@@ -36,7 +49,7 @@ app.use(bodyParser.json());
 
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
-const OpenAI = require("openai");
+
 const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
 });
@@ -63,7 +76,7 @@ app.post('/users',async (req,res) =>{
 
   try{
     const {username,email, password}= req.body.data;
-    console.log(JSON.stringify(req.body.data))
+ 
     if(!username && !email && !password){
         return res.json({data:null,message:'A value must be provided for username email'},400)
     } 
@@ -93,7 +106,7 @@ const loadConversation =async (username) => {
     const [contents] = await file.download();
     return JSON.parse(contents.toString());
   } catch (error) {
-    console.error("Error loading conversation:", error);
+ 
     return [{ role: "system", content: "Welcome back to your private chat with Lisa Bondwell." }];
   }
   // const convoFile = path.join(createUserDirectory(username), 'conversation.json');
@@ -114,9 +127,9 @@ const saveConversation = async (username, conversation) => {
         cacheControl: 'no-cache',
       },
     });
-    console.log(`Conversation data stored successfully for ${username}`);
+    
   } catch (error) {
-    console.error("Error saving conversation:", error);
+ 
   }
   // const convoFile = path.join(createUserDirectory(username), 'conversation.json');
   // fs.writeFileSync(convoFile, JSON.stringify(conversation, null, 2));
@@ -200,7 +213,7 @@ io.on('connection', (socket) => {
     });
   });
 });
-app.use('/api/v1', routes);
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;

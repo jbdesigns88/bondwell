@@ -9,7 +9,11 @@ import {
     TouchableOpacity, 
     useWindowDimensions 
 } from "react-native";
-
+import Login from "./Authentication/Login";
+import { useUser } from "./hooks/useUser";
+import { supabase } from "./lib/supabase";
+import { AuthApiError } from "@supabase/supabase-js";
+import { useRouter } from "expo-router";
 const Welcome = ({ username }) => (
     <View style={styles.container}>
         <Text style={styles.WelcomeMessage}>
@@ -18,111 +22,51 @@ const Welcome = ({ username }) => (
     </View>
 );
 
-const Login = ({ callback = (success = false) => {} }) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [success,setSuccess] = useState(false)
-    const [error, setError] = useState("");
+const LoginScreen = () => {
+ 
+    
     const { width } = useWindowDimensions();
     const storedUsername = localStorage.getItem("bondwell:username");
-
+    const {LoginUser, isLoggedIn,isLoading} = useUser()
+ 
+    const router = useRouter()
     useEffect(() => {
-        if (!/^[a-zA-Z0-9]+$/.test(username) && username) {
-            setError("Username must be alphanumeric only (A-Z, 0-9).");
-        } else {
-            setError("");
+        if(!isLoggedIn) {return }
+        router.replace('/');
+    }),[isLoggedIn]
+
+
+    const handleSubmission = async (valid,data) => {
+        console.log(`handling log in user with the data`)
+        console.log(data)
+        console.log('and the value')
+        console.log(`value`)
+        try{
+            if(!valid) return
+            await LoginUser(data)
+
         }
-    }, [username]);
-
-    // Determine background image based on screen width
-    const backgroundImage =
-        width <= 360
-            ? require("../images/mobile_background.jpg")
-            : width <= 414
-            ? require("../images/mobile_background_bigger.jpg")
-            : require("../images/web_background.jpg");
-
-
-    const handleSubmission = async () => {
-        if (!error && username ) {
-            await axios.post('/api/v1/user', {
-                data: {
-                    username,
-                    password,
-                },
-            })
-            .then(response => {
-                console.log("User created successfully:", response.data);   
-            })
-            .catch(error => {
-                console.error("Error creating user:", error);
-                setError("Error creating user. Please try again.");
-            });
-            localStorage.setItem("bondwell:username", username);
-            setSuccess(true);
+        catch(err){
+            console.log(`message `)
+            console.log(err.message)
+            if(err instanceof AuthApiError){
+                console.log(err.message)
+            }
+            console.log('issue ',err)
         }
-            
     }
+
     return (
-        <ImageBackground
-            source={backgroundImage}
-            style={styles.background}
-            imageStyle={styles.image}
-        >
-            <SafeAreaView style={styles.loginContainer}>
-                <View style={styles.logoContainer}>
-                    <Text style={styles.logoText}>Bondwell</Text>
-                    <Text style={styles.subline}>The Intimacy App</Text>
-                </View>
-
-                {storedUsername && success ? (
-                    <Welcome username={storedUsername} />
-                ) : (
-                    <View style={styles.container}>
-                        <Text style={styles.introText}>Enter a username to join:</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Username"
-                            placeholderTextColor="#B8868B"
-                            value={username}
-                            onChangeText={setUsername}
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Password"
-                            placeholderTextColor="#B8868B"
-                            value={username}
-                            onChangeText={setPassword}
-                        />
-                        {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={() => {
-                                if (!error && username) {
-                                    localStorage.setItem("bondwell:username", username);
-                                    setUsername(username)
-                                    setSuccess(true)
-                                    if(callback){
-
-                                        callback(true, username);
-                                    }
-                                } else {
-                                    if(callback){
-
-                                        callback(false, username);
-                                    }
-                                }
-                            }}
-                        >
-                            <Text style={styles.buttonText}>Join</Text>
-                        </TouchableOpacity>
-                    </View>
-                )}
-            </SafeAreaView>
-        </ImageBackground>
-    );
+    
+        <>
+         <Login callback={(valid,data) => { handleSubmission(valid,data)}}/>
+    
+        </>
+    )
 };
 
+// Disable header
+ 
 const styles = StyleSheet.create({
     background: {
         flex: 1,
@@ -220,4 +164,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Login;
+export default LoginScreen;

@@ -1,8 +1,12 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { StyleSheet } from 'react-native'
-import { Tabs } from 'expo-router'
+import { Tabs, useRouter } from 'expo-router'
+import { useEffect } from 'react'
+import { useUser } from '../hooks/useUser'
 
 export default function TabsLayout ()  {
+
+    
     return (
         <Tabs screenOptions={{
             tabBarActiveTintColor:"#E3B9BC",

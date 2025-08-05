@@ -9,4 +9,4 @@ const IntialKnowledge = [
       
 ];
 
-module.exports = IntialKnowledge
+ export default IntialKnowledge

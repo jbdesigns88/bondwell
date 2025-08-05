@@ -1,45 +1,59 @@
-import { validate } from "uuid";
-import supabase from "../../../supabase";
-import { em, option } from "framer-motion/client";
+ 
+import dotenv from 'dotenv';
+dotenv.config(); // Load environment variables
+import {getSupabaseClient} from "#supabase";
+ 
+const supabase = getSupabaseClient()
+import prisma from "#database";
 
 const app_url = process.env.APP_URL || 'https://bondwellapp.com';
-
-export const signUpNewUser = async (email, password) => {
-    try{
-        if (!email || !password) {
-            throw new Error('Email and password are required for sign up.');
-        }
-        validate(email);
-        validate(password);
-        
-        if (!validate(email)) {
-            throw new Error('Invalid email format.');
-        }
-
-        if( !validate(password)) {
-            throw new Error('Invalid password format.');
-        }
-
-        const { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
-            options: {
-                emailRedirectTo: app_url + '/auth/callback',
-            }
-        });
-
-        if (error) {
-            throw error;
-        }
-
-        console.log('User signed up successfully:', data);
-        return data;
+const db = prisma;
+export const signUpNewUser = async (input = {}) => {
+let supabase_user_id;
+  try {
+    const { email, password, firstname, lastname, username } = input;
+    if (!email || !password) {
+      throw new Error('Email and password are required for sign up.');
     }
-    catch (error) {
-        console.error('Error signing up new user:', error);
-        throw error;
+
+    const {data, error} = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${app_url}/auth/callback`,
+      },
+    });
+
+    if(error){
+        throw new Error('issue creating auth user: ',error)
     }
-}
+ 
+    if (!data || !data.user || !data.user || !data.user.id) {
+      throw new Error('User ID not returned from Supabase.');
+    }
+
+    console.log(`should have user property: `,data)
+    supabase_user_id = data.user.id;
+  
+    const createdUser = await prisma.public_users.create({
+      data: {
+        id: supabase_user_id,
+        firstname,
+        lastname,
+        username,
+      },
+    });
+    console.log(` the user id is ${supabase_user_id}`)
+    console.log(`user succesfully created: `, createdUser)
+    // return createdUser;
+  } catch (error) {
+    await supabase.auth.admin.deleteUser(supabase_user_id);
+    console.error('Error signing up new user:', error);
+    throw error;
+  }
+};
+
+
 
 export const SignInUser = async (provider = null,options = {}) => {
     if(!provider || provider === 'email') {

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView, ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import io from 'socket.io-client';
 import Login from '../login'
+import { useUser } from '../hooks/useUser';
+import { useRouter } from 'expo-router';
 // import Layout from './_layout';
 
 export default function BondwellChat() {
@@ -22,16 +24,19 @@ export default function BondwellChat() {
   const [isDone,setIsDone] = useState(false)
   const [inputHeight, setInputHeight] = useState(40); // Initial height of the input box 
   const MAX_HEIGHT = 450;
+  const {isLoggedIn,user,isLoading} = useUser();
+  const router = useRouter()
 
   // https://bondwell-441003.appspot.com
 
   useEffect(() => {
-    const userLoggedin = localStorage.getItem("bondwell:username")
-    if(userLoggedin !== null){
+    console.log(`check log in ${isLoggedIn}`)
+    if(isLoggedIn){
+      console.log(`setting username`)
       setEnterRoom(true)
-      setUsername(userLoggedin)
+      setUsername(user.email)
     }
-  },[])
+  },[isLoggedIn])
 
   useEffect(() => {
     if(isDone){
@@ -60,7 +65,7 @@ export default function BondwellChat() {
 
   // https://bondwell-441003.appspot.com
   useEffect(() => {
-    const newSocket = io('http://localhost:3000', { transports: ['websocket'] });
+    const newSocket = io('http://localhost:8008', { transports: ['websocket'] });
     setSocket(newSocket);
 
     newSocket.on('message', (message) => { // message from AI
@@ -154,17 +159,9 @@ export default function BondwellChat() {
 
 
  
-
-  if (!enterRoom) {
-    return (
-      // <Layout/>
-      
-      <Login callback={(success, uname) => {
-        setEnterRoom(success);
-        setUsername(uname);
-      }}/>
-    );
-  }
+  // if(!isLoggedin && !isLoading){
+  //   router.replace('/login')
+  // }
   
   return (
     <SafeAreaView style={styles.container}>
