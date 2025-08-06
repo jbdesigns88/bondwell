@@ -1,6 +1,10 @@
  
 import dotenv from 'dotenv';
-dotenv.config(); // Load environment variables
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
+
+ // Load environment variables
 import {getSupabaseClient} from "#supabase";
  
 const supabase = getSupabaseClient()
@@ -24,6 +28,7 @@ let supabase_user_id;
       },
     });
 
+    console.log(`USER RETUREND FROM SUPABASE: `,data)
     if(error){
         throw new Error('issue creating auth user: ',error)
     }
@@ -34,18 +39,25 @@ let supabase_user_id;
 
     console.log(`should have user property: `,data)
     supabase_user_id = data.user.id;
-  
-    const createdUser = await prisma.public_users.create({
-      data: {
+   const createdUser = await supabase.from('public.users')
+    .insert({
         id: supabase_user_id,
         firstname,
         lastname,
         username,
-      },
     });
+    // const createdUser = await prisma.public_users.create({
+    //   data: {
+    //     id: supabase_user_id,
+    //     firstname,
+    //     lastname,
+    //     username,
+    //   },
+    // });
     console.log(` the user id is ${supabase_user_id}`)
     console.log(`user succesfully created: `, createdUser)
-    // return createdUser;
+
+    return createdUser;
   } catch (error) {
     await supabase.auth.admin.deleteUser(supabase_user_id);
     console.error('Error signing up new user:', error);
@@ -53,6 +65,7 @@ let supabase_user_id;
   }
 };
 
+ 
 
 
 export const SignInUser = async (provider = null,options = {}) => {

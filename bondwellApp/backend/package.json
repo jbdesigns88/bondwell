@@ -11,16 +11,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "prisma": {
-    "schema": "./prisma/schema.prisma"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "db:introspect": "npx prisma db pull",
-    "prisma:generate": "npx prisma generate",
-    "postinstall": "npx prisma generate"
+    "prisma:generate": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +28,7 @@
     "axios": "^1.7.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "express": "^5.1.0",
     "openai": "^4.71.0",
     "passport": "^0.7.0",
     "pg": "^8.13.1",
@@ -43,7 +40,14 @@
     "uuid": "^11.0.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.2.0",
+    "@types/socket.io": "^3.0.2",
+    "@types/uuid": "^10.0.0",
     "nodemon": "^3.1.10",
-    "prisma": "^6.13.0"
+    "prisma": "^6.13.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
   }
 }

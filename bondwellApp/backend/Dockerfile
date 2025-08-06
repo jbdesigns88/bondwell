@@ -1,5 +1,5 @@
-FROM node:18-alpine
-RUN apk add --no-cache nodejs npm 
+FROM node:24-alpine
+RUN apk add --no-cache openssl 
 
 
 
@@ -8,11 +8,13 @@ WORKDIR /app
 
 # Copy the package.json and install dependencies
 COPY package*.json ./
-RUN npm install express --save
-RUN npm install
+RUN yarn install
 
 # Copy the rest of the application code
+COPY prisma ./prisma
 COPY . .
+
+RUN npx prisma generate
 
 # Expose the port and start the server
 EXPOSE 3000

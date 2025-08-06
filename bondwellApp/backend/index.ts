@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config(); // Load environment variables
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import axios from 'axios';
@@ -14,7 +14,9 @@ import { Storage } from '@google-cloud/storage';
 import routes from './routes/index.js';
 import { OpenAI } from "openai";
  
-
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 const app = express();
 const server = http.createServer(app);
  
