@@ -8,7 +8,7 @@ import LogoutIconButton from '../components/LogoutIconButton '
 
 const Welcome = ({ username }) => {
 
-
+  const router = useRouter()
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.contentWrapper}>
@@ -52,7 +52,7 @@ const Welcome = ({ username }) => {
 export default function Home() {
     const {user,isLoggedIn,isLoading} = useUser()
 
-      const router = useRouter();
+      
       useEffect(() => {
         if(!isLoggedIn && !isLoading){
             router.replace('login')

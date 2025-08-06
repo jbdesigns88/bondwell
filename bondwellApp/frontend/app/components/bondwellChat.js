@@ -65,7 +65,7 @@ export default function BondwellChat() {
 
   // https://bondwell-441003.appspot.com
   useEffect(() => {
-    const newSocket = io('http://localhost:8008', { transports: ['websocket'] });
+    const newSocket = io('https://backend-dot-bondwell-441003.ue.r.appspot.com', { transports: ['websocket'] });
     setSocket(newSocket);
 
     newSocket.on('message', (message) => { // message from AI
