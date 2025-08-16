@@ -13,6 +13,7 @@ import cors from 'cors';
 import { Storage } from '@google-cloud/storage';
 import routes from './routes/index.js';
 import { OpenAI } from "openai";
+import { socketManager, SocketManager } from './socket/SocketManager.js';
  
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -22,7 +23,7 @@ const server = http.createServer(app);
  
 
 // Middleware
-app.use(cors());
+app.use(cors({origin:'*'})) // update
 app.use(bodyParser.json());
 app.use('/api/v1', routes);
 
@@ -32,7 +33,7 @@ const httpServer = http.createServer(app);
 
 
 // Enable CORS for Express routes
-app.use(cors({origin:'*'}))
+
 
 // Enable connection state recovery and CORS for Socket.io
 const io = new Server(httpServer, {
@@ -46,7 +47,7 @@ const io = new Server(httpServer, {
     skipMiddlewares: true,
   },
 });
-
+socketManager.connect(io);
 app.use(bodyParser.json());
 
 
@@ -56,12 +57,12 @@ const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
 });
 
-
+// storage to save  conversations...
 const storage = new Storage();
 const bucketName = 'bondwell-441003.appspot.com'; // Replace with your actual bucket name
 
 // Function to create a directory for each user
-const createUserDirectory = (username) => {
+const createUserDirectory = (username:string) => {
   const userDir = path.join(__dirname, 'conversations', username);
   if (!fs.existsSync(userDir)) {
     fs.mkdirSync(userDir, { recursive: true });
@@ -73,22 +74,25 @@ app.get("/ready",(req,res) =>{
   res.json({"message":"you connected successfuly"})
 } )
 
-
+/*
+  @deprecated
+  -  utilize api/v1/users endpoint
+*/
 app.post('/users',async (req,res) =>{
 
   try{
     const {username,email, password}= req.body.data;
  
     if(!username && !email && !password){
-        return res.json({data:null,message:'A value must be provided for username email'},400)
+        return res.status(400).json({data:null,message:'A value must be provided for username email'})
     } 
 
     //save user.save(username,email,password)
   
-    return res.json({data:{username,email}, message:'user was successfully created'},200)
+    return res.status(200).json({data:{username,email}, message:'user was successfully created'})
   }
   catch(e){
-    return res.json({data:null,message:'A value must be provided for username email'},400)
+    return res.status(400).json({data:null,message:'A value must be provided for username email'})
   }
   // save username and password
 
@@ -96,8 +100,10 @@ app.post('/users',async (req,res) =>{
 
   
 })
-// Function to load an existing conversation if it exists
-const loadConversation =async (username) => {
+
+
+// Load a conversation from storage...
+const loadConversation =async (username:string) => {
 
   const file = storage.bucket(bucketName).file(`conversations/${username}.json`);
   try {
@@ -119,7 +125,7 @@ const loadConversation =async (username) => {
 };
 
 // Function to save a conversation to a JSON file
-const saveConversation = async (username, conversation) => {
+const saveConversation = async (username:string, conversation:string) => {
  
   const file = storage.bucket(bucketName).file(`conversations/${username}.json`);
   try {
@@ -138,83 +144,83 @@ const saveConversation = async (username, conversation) => {
 };
 
 // Handle client connections
-io.on('connection', (socket) => {
-  console.log('New client connected');
+// io.on('connection', (socket) => {
+//   console.log('New client connected');
 
-  socket.on('join', async (username) => {
-    let userId, conversation;
-    console.log(`user: ${username} has joined the chat`)
+//   socket.on('join', async (username) => {
+//     let userId, conversation;
+//     console.log(`user: ${username} has joined the chat`)
     
-    if (socket.recovered) {
-      userId = socket.userId;
-      conversation = await loadConversation(username);
-      console.log(`Recovered session for ${username}`);
-    } else {
-      userId = uuidv4();
-      conversation =  [
-          ...baseKnowledge
-      ];
-    }
+//     if (socket.recovered) {
+//       userId = socket.userId;
+//       conversation = await loadConversation(username);
+//       console.log(`Recovered session for ${username}`);
+//     } else {
+//       userId = uuidv4();
+//       conversation =  [
+//           ...baseKnowledge
+//       ];
+//     }
 
-    socket.userId = userId;
-    socket.username = username;
+//     socket.userId = userId;
+//     socket.username = username;
 
-    console.log(`User joined: ${username} with ID: ${userId}`);
-    socket.emit('previousMessages', conversation.slice(9)); // fix to now load intial knowledge base, but this is a temporary fix.
+//     console.log(`User joined: ${username} with ID: ${userId}`);
+//     socket.emit('previousMessages', conversation.slice(9)); // fix to now load intial knowledge base, but this is a temporary fix.
 
-    socket.on('message', async (messageContent) => {
-      console.log(`asked a question: ${messageContent}`)
+//     socket.on('message', async (messageContent) => {
+//       console.log(`asked a question: ${messageContent}`)
      
-      const userMessage = { role: 'user', content: messageContent };
-      conversation.push(userMessage);
+//       const userMessage = { role: 'user', content: messageContent };
+//       conversation.push(userMessage);
       
-      console.log(`the Convo is ${JSON.stringify(conversation)}`)
-      try {
-        const response = await openai.chat.completions.create({
-          model: "gpt-4",
-          messages: conversation,
-          temperature: 1,
-          max_tokens: 2048,
-          top_p: 1,
-          frequency_penalty: 0,
-          presence_penalty: 0,
-          stream: true
-        });
+//       console.log(`the Convo is ${JSON.stringify(conversation)}`)
+//       try {
+//         const response = await openai.chat.completions.create({
+//           model: "gpt-4",
+//           messages: conversation,
+//           temperature: 1,
+//           max_tokens: 2048,
+//           top_p: 1,
+//           frequency_penalty: 0,
+//           presence_penalty: 0,
+//           stream: true
+//         });
 
       
         
-        let convo_output  = []
-        for await (const chunk of response) {
-          const partialContent = chunk.choices[0].delta?.content || '';
-          if (partialContent) {
-            console.log(`partian contenet is ${partialContent}` )
-            socket.emit('message', { role: 'assistant', content: partialContent });
-            convo_output.push(partialContent)
-          }
+//         let convo_output  = []
+//         for await (const chunk of response) {
+//           const partialContent = chunk.choices[0].delta?.content || '';
+//           if (partialContent) {
+//             console.log(`partian contenet is ${partialContent}` )
+//             socket.emit('message', { role: 'assistant', content: partialContent });
+//             convo_output.push(partialContent)
+//           }
          
-        }
+//         }
        
         
-        // const assistantReply = response.choices[0].message.content;
-        // const aiMessage = { role: 'assistant', content: assistantReply };
-        // conversation.push(aiMessage);
+//         // const assistantReply = response.choices[0].message.content;
+//         // const aiMessage = { role: 'assistant', content: assistantReply };
+//         // conversation.push(aiMessage);
 
-        await saveConversation(username, convo_output.join(""));
+//         await saveConversation(username, convo_output.join(""));
        
-        socket.emit('done',{'status':'complete'})
-        console.log(`after the chunk is done`)
+//         socket.emit('done',{'status':'complete'})
+//         console.log(`after the chunk is done`)
 
-      } catch (error) {
-        console.error("Error fetching AI response:", error);
-        socket.emit('error', { content: "An error occurred while fetching the response." });
-      }
-    });
+//       } catch (error) {
+//         console.error("Error fetching AI response:", error);
+//         socket.emit('error', { content: "An error occurred while fetching the response." });
+//       }
+//     });
 
-    socket.on('disconnect', () => {
-      console.log(`User disconnected: ${username}`);
-    });
-  });
-});
+//     socket.on('disconnect', () => {
+//       console.log(`User disconnected: ${username}`);
+//     });
+//   });
+// });
 
 
 // Start the server

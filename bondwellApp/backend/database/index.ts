@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
- let prisma;
+ let prisma:PrismaClient | null = null;
 try{
      prisma  =  new PrismaClient();
     if(!prisma) {
-        throw new error("Could not connect ot database")
+        throw new Error("Could not connect ot database")
     }
 }
 catch(err){

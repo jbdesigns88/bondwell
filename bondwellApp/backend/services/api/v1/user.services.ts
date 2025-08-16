@@ -3,16 +3,22 @@ import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
-
- // Load environment variables
-import {getSupabaseClient} from "#supabase";
+import { getSupabaseClient } from 'supabase.js';
  
 const supabase = getSupabaseClient()
-import prisma from "#database";
+import prisma from 'database/index.js';
 
 const app_url = process.env.APP_URL || 'https://bondwellapp.com';
 const db = prisma;
-export const signUpNewUser = async (input = {}) => {
+
+interface UserDataType {
+  email:string,
+  password:string
+  firstname:string
+  lastname:string
+  username:string
+}
+export const signUpNewUser = async (input:UserDataType) => {
 let supabase_user_id;
   try {
     const { email, password, firstname, lastname, username } = input;
@@ -59,7 +65,7 @@ let supabase_user_id;
 
     return createdUser;
   } catch (error) {
-    await supabase.auth.admin.deleteUser(supabase_user_id);
+    await supabase.auth.admin.deleteUser(supabase_user_id || "");
     console.error('Error signing up new user:', error);
     throw error;
   }
@@ -68,7 +74,7 @@ let supabase_user_id;
  
 
 
-export const SignInUser = async (provider = null,options = {}) => {
+export const SignInUser = async (provider = null,options:UserDataType) => {
     if(!provider || provider === 'email') {
         const { email, password } = options;
         if (!email || !password) {
@@ -79,7 +85,7 @@ export const SignInUser = async (provider = null,options = {}) => {
     }
 }
 
-const signInUserWithEmail = async (email,password) => {
+const signInUserWithEmail = async (email:string,password:string) => {
     try {
         if (!email || !password) {
             throw new Error('Email and password are required for sign in.');

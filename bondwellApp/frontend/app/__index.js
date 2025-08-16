@@ -47,9 +47,9 @@ export default function App() {
   // useEffect(() => {
   //   console.log(`the current message is ${currentMessage}`)
   // },[currentMessage])
-
+  //'https://bondwell-441003.appspot.com'
   useEffect(() => {
-    const newSocket = io('https://bondwell-441003.appspot.com', { transports: ['websocket'] });
+    const newSocket = io('localhost:8008', { transports: ['websocket'] });
     setSocket(newSocket);
 
     newSocket.on('message', (message) => { // message from AI

@@ -1,16 +1,15 @@
-import {OpenAI} from './OpenAI'
-import { BaseAI } from "./BaseAI";
+import {OpenAI} from '@ai/OpenAI.js'
+import { BaseAI } from "@ai/BaseAI.js";
 const Providers = {
     'openai' :new OpenAI() 
 }
 
 export class AI extends BaseAI {
-    constructor(provider_type = 'openai'){
+    constructor(provider_type: keyof typeof Providers = 'openai'){
         super()
-        if(! (provider_type in Providers)){
+        if(!(provider_type in Providers)){
             throw new Error("the provider_type is not valid")
         }
-        return Providers[provider_type] 
-        
+        return Providers[provider_type]
     }
 }

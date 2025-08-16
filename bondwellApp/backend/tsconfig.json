@@ -2,14 +2,28 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+    "rootDir": ".",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths":{
+      "@ai/*": ["ai/*"],
+      "@supabase": ["supabase"],
+      "@services/*": ["services/api/v1/*"],
+      "@routes/*": ["routes/api/v1/*"],
+      "@database": ["database/index"],
+ 
+    },
+    "moduleResolution": "NodeNext", // <-- important
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
-    "types": [],
+    "types": ["node"],
+    "lib":["esnext"],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],

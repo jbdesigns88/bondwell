@@ -1,8 +1,8 @@
-import { BaseAI } from "./BaseAI";
+import { BaseAI } from "@ai/BaseAI.js";
 import { OpenAI as OfficialOpenAI } from "openai";
 
 export class OpenAI extends BaseAI {
-  private ai;
+  private ai!: OfficialOpenAI;
   private settings = {
     model: "gpt-4",
     temperature: 1,
@@ -23,10 +23,11 @@ export class OpenAI extends BaseAI {
     const openai = new OfficialOpenAI({
       apiKey: OPENAI_API_KEY,
     });
+    
     this.ai = openai;
   }
 
-  public async create(msg, callback) {
+  public async create(msg:string, callback:(data:string)=>void) {
     
     try {
       if (!this.ai) throw new Error("OpenAI client not connected.");
@@ -34,11 +35,23 @@ export class OpenAI extends BaseAI {
       const response = await this.ai.chat.completions.create(this.settings);
 
       const conversation: string[] = [];
-      for await (const chunk of response) {
-        const partialContent = chunk.choices[0].delta?.content || "";
-        if (partialContent) {
-          callback(partialContent);
-          conversation.push(partialContent);
+      if (typeof (response as any)[Symbol.asyncIterator] === "function") {
+        for await (const chunk of response as AsyncIterable<any>) {
+          const partialContent: string = chunk.choices[0].delta?.content || "";
+          if (partialContent) {
+            callback(partialContent);
+            conversation.push(partialContent);
+          }
+        }
+      } else {
+        // Handle non-stream response
+        const choices = (response as any).choices || [];
+        for (const choice of choices) {
+          const content: string = choice.message?.content || "";
+          if (content) {
+            callback(content);
+            conversation.push(content);
+          }
         }
       }
 

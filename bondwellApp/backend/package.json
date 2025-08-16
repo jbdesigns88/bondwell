@@ -1,19 +1,14 @@
 {
   "name": "backend",
   "type": "module",
-  "imports": {
-    "#/*": "./*",
-    "#supabase": "./supabase.js",
-    "#services/*": "./services/*",
-    "#routes/*": "./routes/*",
-    "#database": "./database/index.js"
-  },
+ 
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "build": "tsc",
+    "start": "yarn build && node dist/index.js",
     "dev": "nodemon index.js",
     "db:introspect": "npx prisma db pull",
     "prisma:generate": "npx prisma generate"

@@ -241,7 +241,7 @@ export default function BondwellChat() {
         placeholder="Ask for advice..."
         placeholderTextColor="#B8868B"
         multiline={true}
-        onContentSizeChange={(event) => {
+        onContent                                                                 SizeChange={(event) => {
             const newHeight = event.nativeEvent.contentSize.height;
             setInputHeight(Math.min(newHeight, MAX_HEIGHT)); // Adjust height but cap it at MAX_HEIGHT
           }}
