@@ -1,13 +1,18 @@
-import dotenv from 'dotenv';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SignInUser = exports.signUpNewUser = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
 if (process.env.NODE_ENV !== 'production') {
-    dotenv.config();
+    dotenv_1.default.config();
 }
-import { getSupabaseClient } from 'supabase.js';
-const supabase = getSupabaseClient();
-import prisma from 'database/index.js';
+const supabase_1 = require("../../../supabase");
+const supabase = (0, supabase_1.getSupabaseClient)();
+// import prisma from 'database/index.js';
 const app_url = process.env.APP_URL || 'https://bondwellapp.com';
-const db = prisma;
-export const signUpNewUser = async (input) => {
+const signUpNewUser = async (input) => {
     let supabase_user_id;
     try {
         const { email, password, firstname, lastname, username } = input;
@@ -23,7 +28,8 @@ export const signUpNewUser = async (input) => {
         });
         console.log(`USER RETUREND FROM SUPABASE: `, data);
         if (error) {
-            throw new Error('issue creating auth user: ', error);
+            console.log(error);
+            throw new Error(`issue creating auth user: `);
         }
         if (!data || !data.user || !data.user || !data.user.id) {
             throw new Error('User ID not returned from Supabase.');
@@ -55,7 +61,8 @@ export const signUpNewUser = async (input) => {
         throw error;
     }
 };
-export const SignInUser = async (provider = null, options) => {
+exports.signUpNewUser = signUpNewUser;
+const SignInUser = async (provider = null, options) => {
     if (!provider || provider === 'email') {
         const { email, password } = options;
         if (!email || !password) {
@@ -64,6 +71,7 @@ export const SignInUser = async (provider = null, options) => {
         await signInUserWithEmail(email, password);
     }
 };
+exports.SignInUser = SignInUser;
 const signInUserWithEmail = async (email, password) => {
     try {
         if (!email || !password) {
@@ -84,4 +92,3 @@ const signInUserWithEmail = async (email, password) => {
         throw error;
     }
 };
-//# sourceMappingURL=user.services.js.map

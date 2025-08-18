@@ -11,7 +11,7 @@ import baseKnowledge from './knowledge_base/intial_knowledge.js';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import { Storage } from '@google-cloud/storage';
-import routes from './routes/index.js';
+import router from "./routes"
 import { OpenAI } from "openai";
 import { socketManager, SocketManager } from './socket/SocketManager.js';
  
@@ -23,9 +23,17 @@ const server = http.createServer(app);
  
 
 // Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors({origin:'*'})) // update
-app.use(bodyParser.json());
-app.use('/api/v1', routes);
+
+app.use('/api/v1', router);
+
+
+
+
+
+
 
  
  

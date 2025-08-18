@@ -1,4 +1,4 @@
-import { BaseAI } from "@ai/BaseAI.js";
+import { BaseAI } from "./BaseAI";
 import { OpenAI as OfficialOpenAI } from "openai";
 
 export class OpenAI extends BaseAI {

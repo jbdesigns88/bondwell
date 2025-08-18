@@ -1,9 +1,14 @@
-import express from 'express';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
 //import { getUser, updateUser } from '../../controllers/v1/UserController.js';
 // import { authenticate } from '../../middlewares/auth.js';
-import { signUpNewUser } from '@services/user.services.js';
+const user_services_1 = require("../../../services/api/v1/user.services");
 //import { validate } from '../../utils/validation.js';
-const router = express.Router();
+const router = express_1.default.Router();
 router.get('/', async (req, res) => {
     try {
         //const user = await getUser(req.user.id);
@@ -43,7 +48,7 @@ router.put('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const data = req.body.data;
-        signUpNewUser(data)
+        (0, user_services_1.signUpNewUser)(data)
             .then(data => {
             res.status(201).json({ data, message: 'User created successfully.' });
         })
@@ -57,5 +62,4 @@ router.post('/', async (req, res) => {
         res.status(400).json({ error: 'Internal Server Error' });
     }
 });
-export default router;
-//# sourceMappingURL=user.routes.js.map
+exports.default = router;

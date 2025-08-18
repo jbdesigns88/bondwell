@@ -3,13 +3,13 @@ import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
-import { getSupabaseClient } from 'supabase.js';
+import { getSupabaseClient } from '../../../supabase';
  
 const supabase = getSupabaseClient()
-import prisma from 'database/index.js';
+// import prisma from 'database/index.js';
 
 const app_url = process.env.APP_URL || 'https://bondwellapp.com';
-const db = prisma;
+// const db = prisma;
 
 interface UserDataType {
   email:string,
@@ -36,7 +36,8 @@ let supabase_user_id;
 
     console.log(`USER RETUREND FROM SUPABASE: `,data)
     if(error){
-        throw new Error('issue creating auth user: ',error)
+      console.log(error)
+        throw new Error(`issue creating auth user: ` )
     }
  
     if (!data || !data.user || !data.user || !data.user.id) {

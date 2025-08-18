@@ -1,11 +1,13 @@
-import { Server, Socket } from "socket.io";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.handleLeavingRoom = exports.handleJoiningRoom = void 0;
 const EVENTS = {
     ROOMS: {
         JOIN: 'user:event:joinroom',
         LEAVE: 'user:event:leave'
     }
 };
-export const handleJoiningRoom = (io, socket) => {
+const handleJoiningRoom = (io, socket) => {
     socket.on(EVENTS.ROOMS.JOIN, (payload) => {
         const { room_name } = payload;
         const Validated_Room_Name = validateRoom(room_name);
@@ -14,13 +16,14 @@ export const handleJoiningRoom = (io, socket) => {
     // ADD ROOM IN DB MAYBE
     //
 };
-export const handleLeavingRoom = (io, socket) => {
+exports.handleJoiningRoom = handleJoiningRoom;
+const handleLeavingRoom = (io, socket) => {
     socket.on(EVENTS.ROOMS.LEAVE, (payload) => {
         const { room_name } = payload;
         socket.leave(room_name);
     });
 };
+exports.handleLeavingRoom = handleLeavingRoom;
 const validateRoom = (room_name) => {
     return room_name;
 };
-//# sourceMappingURL=userEvents.socket.handlers.js.map

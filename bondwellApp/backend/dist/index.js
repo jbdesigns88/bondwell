@@ -1,31 +1,34 @@
-import dotenv from 'dotenv';
-import express from 'express';
-import bodyParser from 'body-parser';
-import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
-import fs from 'fs';
-import path from 'path';
-import http from 'http';
-import baseKnowledge from './knowledge_base/intial_knowledge.js';
-import { Server } from 'socket.io';
-import cors from 'cors';
-import { Storage } from '@google-cloud/storage';
-import routes from './routes/index.js';
-import { OpenAI } from "openai";
-import { socketManager, SocketManager } from './socket/SocketManager.js';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv_1 = __importDefault(require("dotenv"));
+const express_1 = __importDefault(require("express"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
+const http_1 = __importDefault(require("http"));
+const socket_io_1 = require("socket.io");
+const cors_1 = __importDefault(require("cors"));
+const storage_1 = require("@google-cloud/storage");
+const routes_1 = __importDefault(require("./routes"));
+const openai_1 = require("openai");
+const SocketManager_js_1 = require("./socket/SocketManager.js");
 if (process.env.NODE_ENV !== 'production') {
-    dotenv.config();
+    dotenv_1.default.config();
 }
-const app = express();
-const server = http.createServer(app);
+const app = (0, express_1.default)();
+const server = http_1.default.createServer(app);
 // Middleware
-app.use(cors({ origin: '*' })); // update
-app.use(bodyParser.json());
-app.use('/api/v1', routes);
-const httpServer = http.createServer(app);
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
+app.use((0, cors_1.default)({ origin: '*' })); // update
+app.use('/api/v1', routes_1.default);
+const httpServer = http_1.default.createServer(app);
 // Enable CORS for Express routes
 // Enable connection state recovery and CORS for Socket.io
-const io = new Server(httpServer, {
+const io = new socket_io_1.Server(httpServer, {
     cors: {
         origin: '*', // Replace with your frontend URL
         methods: ['GET', 'POST'],
@@ -36,20 +39,20 @@ const io = new Server(httpServer, {
         skipMiddlewares: true,
     },
 });
-socketManager.connect(io);
-app.use(bodyParser.json());
+SocketManager_js_1.socketManager.connect(io);
+app.use(body_parser_1.default.json());
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
-const openai = new OpenAI({
+const openai = new openai_1.OpenAI({
     apiKey: OPENAI_API_KEY,
 });
 // storage to save  conversations...
-const storage = new Storage();
+const storage = new storage_1.Storage();
 const bucketName = 'bondwell-441003.appspot.com'; // Replace with your actual bucket name
 // Function to create a directory for each user
 const createUserDirectory = (username) => {
-    const userDir = path.join(__dirname, 'conversations', username);
-    if (!fs.existsSync(userDir)) {
-        fs.mkdirSync(userDir, { recursive: true });
+    const userDir = path_1.default.join(__dirname, 'conversations', username);
+    if (!fs_1.default.existsSync(userDir)) {
+        fs_1.default.mkdirSync(userDir, { recursive: true });
     }
     return userDir;
 };
@@ -174,4 +177,3 @@ const saveConversation = async (username, conversation) => {
 // Start the server
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-//# sourceMappingURL=index.js.map

@@ -1,2 +1,2 @@
-import { Server, Socket } from 'socket.io';
-//# sourceMappingURL=types.socket.handlers.js.map
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });

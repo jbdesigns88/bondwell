@@ -1,10 +1,11 @@
-import { Server, Socket } from "socket.io";
-import { handleChatEvents } from "./handlers/chatEvents.socket.handlers.js";
-import { handleJoiningRoom, handleLeavingRoom } from "./handlers/userEvents.socket.handlers.js";
-export class SocketManager {
-    io;
-    RegisteredSocketHandlers = [];
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.socketManager = exports.SocketManager = void 0;
+const chatEvents_socket_handlers_js_1 = require("./handlers/chatEvents.socket.handlers.js");
+const userEvents_socket_handlers_js_1 = require("./handlers/userEvents.socket.handlers.js");
+class SocketManager {
     constructor() {
+        this.RegisteredSocketHandlers = [];
         this.io = null;
     }
     connect(io) {
@@ -37,10 +38,10 @@ export class SocketManager {
         return this;
     }
 }
+exports.SocketManager = SocketManager;
 const socketManager = new SocketManager();
+exports.socketManager = socketManager;
 socketManager.
-    addRegisterHandler(handleChatEvents).
-    addRegisterHandler(handleJoiningRoom).
-    addRegisterHandler(handleLeavingRoom);
-export { socketManager };
-//# sourceMappingURL=SocketManager.js.map
+    addRegisterHandler(chatEvents_socket_handlers_js_1.handleChatEvents).
+    addRegisterHandler(userEvents_socket_handlers_js_1.handleJoiningRoom).
+    addRegisterHandler(userEvents_socket_handlers_js_1.handleLeavingRoom);

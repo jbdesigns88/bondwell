@@ -1,5 +1,5 @@
-import {OpenAI} from '@ai/OpenAI.js'
-import { BaseAI } from "@ai/BaseAI.js";
+import {OpenAI} from "./OpenAI"
+import { BaseAI } from "./BaseAI";
 const Providers = {
     'openai' :new OpenAI() 
 }

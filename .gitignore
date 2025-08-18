@@ -6,6 +6,7 @@ bondwellApp/backend/.expo
 bondwellApp/frontend/.expo
 bondwellApp/backend/.env
 bondwellApp/backend/conversations
+bondwellApp/backend/dist
 bondwellApp/frontend/node_modules
  bondwellApp/backend/node_modules
 bondwellApp/backend/app.yaml

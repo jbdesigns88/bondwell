@@ -1,23 +1,28 @@
-import { BaseAI } from "@ai/BaseAI.js";
-import { OpenAI as OfficialOpenAI } from "openai";
-export class OpenAI extends BaseAI {
-    ai;
-    settings = {
-        model: "gpt-4",
-        temperature: 1,
-        max_tokens: 2048,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-        stream: true,
-        messages: []
-    };
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OpenAI = void 0;
+const BaseAI_1 = require("./BaseAI");
+const openai_1 = require("openai");
+class OpenAI extends BaseAI_1.BaseAI {
+    constructor() {
+        super(...arguments);
+        this.settings = {
+            model: "gpt-4",
+            temperature: 1,
+            max_tokens: 2048,
+            top_p: 1,
+            frequency_penalty: 0,
+            presence_penalty: 0,
+            stream: true,
+            messages: []
+        };
+    }
     connect() {
         const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
         if (!OPENAI_API_KEY || OPENAI_API_KEY.length === 0) {
             throw new Error("Must provide a valid API Key");
         }
-        const openai = new OfficialOpenAI({
+        const openai = new openai_1.OpenAI({
             apiKey: OPENAI_API_KEY,
         });
         this.ai = openai;
@@ -57,4 +62,4 @@ export class OpenAI extends BaseAI {
         this.settings = { ...this.settings, ...data };
     }
 }
-//# sourceMappingURL=OpenAI.js.map
+exports.OpenAI = OpenAI;

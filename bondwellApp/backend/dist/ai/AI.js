@@ -1,9 +1,12 @@
-import { OpenAI } from '@ai/OpenAI.js';
-import { BaseAI } from "@ai/BaseAI.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AI = void 0;
+const OpenAI_1 = require("./OpenAI");
+const BaseAI_1 = require("./BaseAI");
 const Providers = {
-    'openai': new OpenAI()
+    'openai': new OpenAI_1.OpenAI()
 };
-export class AI extends BaseAI {
+class AI extends BaseAI_1.BaseAI {
     constructor(provider_type = 'openai') {
         super();
         if (!(provider_type in Providers)) {
@@ -12,4 +15,4 @@ export class AI extends BaseAI {
         return Providers[provider_type];
     }
 }
-//# sourceMappingURL=AI.js.map
+exports.AI = AI;

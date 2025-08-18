@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const IntialKnowledge = [
     {
         role: "system",
@@ -7,5 +9,4 @@ const IntialKnowledge = [
         Is there something along those lines I can assist you with?"`
     },
 ];
-export default IntialKnowledge;
-//# sourceMappingURL=intial_knowledge.js.map
+exports.default = IntialKnowledge;

@@ -2,7 +2,7 @@ import express from 'express';
 //import { getUser, updateUser } from '../../controllers/v1/UserController.js';
 // import { authenticate } from '../../middlewares/auth.js';
  
-import { signUpNewUser  } from '@services/user.services.js';
+import { signUpNewUser  } from '../../../services/api/v1/user.services';
 //import { validate } from '../../utils/validation.js';
 
 const router = express.Router();

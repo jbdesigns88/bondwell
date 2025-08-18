@@ -1,7 +1,7 @@
-import { Chat } from "openai/resources/index.mjs";
-import { socketManager, SocketManager } from "../SocketManager.js";
-import { Server, Socket } from "socket.io";
-import { MessageTarget } from "../type.socket.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.handleChatEvents = void 0;
+const type_socket_js_1 = require("../type.socket.js");
 const EVENT = "chat:message";
 const handleAiMessage = (socket, payload) => { };
 const handleUserMessage = (socket, payload) => { };
@@ -48,10 +48,10 @@ const myself = (socket, io, payload) => {
 ********************************************************************************
 */
 const SENDING_TO = {
-    [MessageTarget.BROADCAST]: broadcast,
-    [MessageTarget.ROOM]: room,
-    [MessageTarget.INDIVIDUAL]: individual,
-    [MessageTarget.SELF]: myself,
+    [type_socket_js_1.MessageTarget.BROADCAST]: broadcast,
+    [type_socket_js_1.MessageTarget.ROOM]: room,
+    [type_socket_js_1.MessageTarget.INDIVIDUAL]: individual,
+    [type_socket_js_1.MessageTarget.SELF]: myself,
 };
 const handleChatEvents = (io, socket) => {
     socket.on(EVENT, (payload) => {
@@ -73,7 +73,7 @@ const handleChatEvents = (io, socket) => {
     // const payload: Payload = {type:'ai',data:{}}
     // SENDING_TO[sending_to](socket,io,payload);
 };
-export { handleChatEvents };
+exports.handleChatEvents = handleChatEvents;
 // export class ChatEvents{
 //   private chatEvents = [];
 //   private socketManager:SocketManager;
@@ -90,4 +90,3 @@ export { handleChatEvents };
 //     }
 //   }
 // }
-//# sourceMappingURL=chatEvents.socket.handlers.js.map

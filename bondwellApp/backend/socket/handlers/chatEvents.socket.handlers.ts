@@ -1,4 +1,4 @@
- import { Chat } from "openai/resources/index.mjs";
+ 
 import {socketManager,SocketManager} from "../SocketManager.js";
 import { Server, Socket } from "socket.io";
 import type { ChatEnvelope  } from "../type.socket.js";
