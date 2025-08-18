@@ -1,8 +1,8 @@
  
-import {socketManager,SocketManager} from "../SocketManager.js";
+import {socketManager,SocketManager} from "../SocketManager";
 import { Server, Socket } from "socket.io";
-import type { ChatEnvelope  } from "../type.socket.js";
-import { MessageTarget } from "../type.socket.js";
+import type { ChatEnvelope  } from "../type.socket";
+import { MessageTarget } from "../type.socket";
  
 
 const EVENT = "chat:message";

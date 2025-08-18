@@ -18,4 +18,4 @@ RUN npx prisma generate
 
 # Expose the port and start the server
 EXPOSE 3000
-CMD ["node", "index.js"]
+CMD ["yarn", "start"]

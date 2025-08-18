@@ -1,7 +1,7 @@
 import {Server,Socket} from "socket.io";
-import { handleChatEvents } from "./handlers/chatEvents.socket.handlers.js";
-import { handleJoiningRoom,handleLeavingRoom } from "./handlers/userEvents.socket.handlers.js";
-import type { SocketHandlerInterface } from "./handlers/types.socket.handlers.js";
+import { handleChatEvents } from "./handlers/chatEvents.socket.handlers";
+import { handleJoiningRoom,handleLeavingRoom } from "./handlers/userEvents.socket.handlers";
+import type { SocketHandlerInterface } from "./handlers/types.socket.handlers";
 
 export class SocketManager {
     private io: Server | null;

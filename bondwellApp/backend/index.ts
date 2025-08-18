@@ -7,13 +7,13 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
 import http from 'http';
-import baseKnowledge from './knowledge_base/intial_knowledge.js';
+import baseKnowledge from './knowledge_base/intial_knowledge';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import { Storage } from '@google-cloud/storage';
 import router from "./routes"
 import { OpenAI } from "openai";
-import { socketManager, SocketManager } from './socket/SocketManager.js';
+import { socketManager, SocketManager } from './socket/SocketManager';
  
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
