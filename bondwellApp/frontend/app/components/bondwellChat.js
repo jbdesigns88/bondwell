@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Animated } from 'react-native';
+import { SafeAreaView, ScrollView,KeyboardAvoidingView, View, Text, TextInput, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import io from 'socket.io-client';
 import Login from '../login'
 import { useUser } from '../hooks/useUser';
@@ -27,7 +27,7 @@ export default function BondwellChat() {
   const {isLoggedIn,user,isLoading} = useUser();
   const router = useRouter()
 
-  // https://bondwell-441003.appspot.com
+  const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL || 'https://backend-dot-bondwell-441003.ue.r.appspot.com';
 
   useEffect(() => {
     console.log(`check log in ${isLoggedIn}`)
@@ -65,16 +65,25 @@ export default function BondwellChat() {
 
   // https://bondwell-441003.appspot.com
   useEffect(() => {
-    const newSocket = io('https://backend-dot-bondwell-441003.ue.r.appspot.com', { transports: ['websocket'] });
+    console.log("connecting to expo socket" + process.env.EXPO_PUBLIC_BACKEND_URL)
+    console.log(process.env)
+    // https://backend-dot-bondwell-441003.ue.r.appspot.com
+    const newSocket = io(BACKEND_URL, { transports: ['websocket'] });
     setSocket(newSocket);
 
-    newSocket.on('message', (message) => { // message from AI
-      setAiResponse((prev) => prev + message.content);
-      setIsNewResponse(false)
-      setIsTyping(true)
+    newSocket.on('chat:message', (payload) => { // message from AI
+      const {message,from} = payload.data
+      if(from === 'ai'){
+        console.log("received ai message")
+        console.log(`the message is ${message}`)
+        setAiResponse((prev) => prev +  message);
+        setIsNewResponse(false)
+        setIsTyping(true)
+        }
     });
 
-    newSocket.on('done', () => {
+    newSocket.on('chat:complete', () => {
+      console.log("chat is complete")
       setIsNewResponse(true)
       setIsDone(true)
 
@@ -114,7 +123,7 @@ export default function BondwellChat() {
 
   useEffect(() => {
     if (socket && enterRoom) {
-      socket.emit('join', username);
+      socket.emit('user:event:joinroom', {room:username});
     }
   }, [enterRoom, socket]);
 
@@ -130,7 +139,18 @@ export default function BondwellChat() {
     setUserMessage(userMessage.text)
     // setMessages((prevMessages) => [...prevMessages, userMessage]);
     setIsDone(false)
-    socket.emit('message', input);
+    const messagePayload = {
+        
+        message: input,
+        from:  user.email,
+        to:'ai',
+        username,
+        target:  'individual', // or 'group'
+        recipientType: 'ai',
+        room: username,
+ 
+    }
+    socket.emit('chat:message',{data:messagePayload} );
     setInput('');
   };
 
@@ -165,6 +185,7 @@ export default function BondwellChat() {
   
   return (
     <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView>
       <Text style={styles.introText}>Hello {username}, I am Lisa Bondwell, your intimacy guide</Text>
 
       <ScrollView style={styles.messagesContainer}>
@@ -235,13 +256,13 @@ export default function BondwellChat() {
       </ScrollView>
 
       <TextInput
-        style={styles.input}
+         style={[styles.input, { height: Math.min(inputHeight, MAX_HEIGHT) }]}
         value={input}
         onChangeText={setInput}
         placeholder="Ask for advice..."
         placeholderTextColor="#B8868B"
         multiline={true}
-        onContent                                                                 SizeChange={(event) => {
+        onContentSizeChange={(event) => {
             const newHeight = event.nativeEvent.contentSize.height;
             setInputHeight(Math.min(newHeight, MAX_HEIGHT)); // Adjust height but cap it at MAX_HEIGHT
           }}
@@ -252,6 +273,7 @@ export default function BondwellChat() {
       <TouchableOpacity style={styles.button} onPress={sendMessage}>
         <Text style={styles.buttonText}>Send</Text>
       </TouchableOpacity>
+       </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

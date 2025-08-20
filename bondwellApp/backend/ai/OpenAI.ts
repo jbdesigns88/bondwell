@@ -1,6 +1,7 @@
 import { BaseAI } from "./BaseAI";
 import { OpenAI as OfficialOpenAI } from "openai";
 
+
 export class OpenAI extends BaseAI {
   private ai!: OfficialOpenAI;
   private settings = {
@@ -11,8 +12,11 @@ export class OpenAI extends BaseAI {
     frequency_penalty: 0,
     presence_penalty: 0,
     stream: true,
-    messages: [] 
+    messages: []
+ 
   };
+
+
 
   public connect() {
     const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
@@ -27,15 +31,20 @@ export class OpenAI extends BaseAI {
     this.ai = openai;
   }
 
-  public async create(msg:string, callback:(data:string)=>void) {
-    
+  public async create(msg:string, callback:(data:string)=>void,completed:()=>void) {
+    console.log(" got the messagge ", msg);
+
     try {
       if (!this.ai) throw new Error("OpenAI client not connected.");
-      this.addSettings( {messages: msg})
+      console.log("OpenAI client connected.");
+   
+      console.log("Settings for OpenAI:", this.settings);
       const response = await this.ai.chat.completions.create(this.settings);
-
+      console.log("Received response from OpenAI.");
+   
       const conversation: string[] = [];
       if (typeof (response as any)[Symbol.asyncIterator] === "function") {
+ 
         for await (const chunk of response as AsyncIterable<any>) {
           const partialContent: string = chunk.choices[0].delta?.content || "";
           if (partialContent) {
@@ -44,6 +53,7 @@ export class OpenAI extends BaseAI {
           }
         }
       } else {
+        console.log("handling non-stream response");
         // Handle non-stream response
         const choices = (response as any).choices || [];
         for (const choice of choices) {
@@ -53,10 +63,16 @@ export class OpenAI extends BaseAI {
             conversation.push(content);
           }
         }
+
+     
       }
+      completed();
 
       // save conversation
-    } catch (err) {}
+    } catch (err) {
+      console.error("Error in OpenAI create method:", err);
+      callback("Error: Unable to process the request at this time.");
+    }
   }
 
   public addSettings(data = {}): void {

@@ -12,6 +12,8 @@ export enum RecipientType {
 
 interface ChatMessageType {
   message: string;
+  username?: string; // for AI messages
+  userId?: string; // for AI messages
   from?: string;
   to?: string;
   room?: string;
