@@ -86,6 +86,7 @@ export default function BondwellChat() {
       console.log("chat is complete")
       setIsNewResponse(true)
       setIsDone(true)
+      setIsTyping(false);
 
 
       // setConversation((prev) => {
@@ -97,7 +98,6 @@ export default function BondwellChat() {
       // })
       // finalizeCurrentMessage();
       // console.log(`The message is done and Completed`)
-      setIsTyping(false);
 
     });
 

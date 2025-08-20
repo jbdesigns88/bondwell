@@ -31,6 +31,34 @@ export class OpenAI extends BaseAI {
     this.ai = openai;
   }
 
+  private async handleStreamResponse(response: AsyncIterable<any>, callback: (data: string) => void) {
+    console.log("Handling stream response from  own function OpenAI.");
+    const conversation: string[] = [];
+      for await (const chunk of response as AsyncIterable<any>) {
+          const partialContent: string = chunk.choices[0].delta?.content || "";
+          if (partialContent) {
+            callback(partialContent);
+            conversation.push(partialContent);
+          }
+        }
+
+      return conversation;
+  }
+
+  private handleNonStreamResponse(response:any,callback: (data: string) => void ) {
+    const conversation: string[] = [];
+     const choices = (response as any).choices || [];
+        for (const choice of choices) {
+          const content: string = choice.message?.content || "";
+          if (content) {
+            callback(content);
+            conversation.push(content);
+          }
+        }
+
+        return conversation;
+  }
+
   public async create(msg:string, callback:(data:string)=>void,completed:()=>void) {
     console.log(" got the messagge ", msg);
 
@@ -45,26 +73,12 @@ export class OpenAI extends BaseAI {
       const conversation: string[] = [];
       if (typeof (response as any)[Symbol.asyncIterator] === "function") {
  
-        for await (const chunk of response as AsyncIterable<any>) {
-          const partialContent: string = chunk.choices[0].delta?.content || "";
-          if (partialContent) {
-            callback(partialContent);
-            conversation.push(partialContent);
-          }
-        }
+          const response_conversation = await this.handleStreamResponse(response as AsyncIterable<any>, callback);
+           conversation.push(...response_conversation || ""); 
       } else {
-        console.log("handling non-stream response");
-        // Handle non-stream response
-        const choices = (response as any).choices || [];
-        for (const choice of choices) {
-          const content: string = choice.message?.content || "";
-          if (content) {
-            callback(content);
-            conversation.push(content);
-          }
-        }
-
-     
+ 
+        const response_conversation = this.handleNonStreamResponse(response, callback);
+        conversation.push(...response_conversation);
       }
       completed();
 
